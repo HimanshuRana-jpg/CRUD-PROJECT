@@ -1,0 +1,37 @@
+﻿@model List<Test_project.Models.person>
+@{
+    ViewBag.Title = "Personlist";
+}
+
+<style>
+    .btn-primary{
+        position:center;
+        margin-left:45%;
+        width:10%;
+    }
+</style>
+
+@{Layout = "~/Views/Person/_LayoutP.cshtml"; }
+
+<table class="table table-hover">
+    <tr>
+        <th>First-Name</th>
+        <th>Last-Name</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FName</td>
+            <td>@item.LName</td>
+            <td>
+                <a href="@Url.Action("Person", new { item.PersonID,item.FName,item.LName})">
+                    <i class="btn btn-success">Update</i></a>
+                <a href="@Url.Action("Delete", new { item.PersonID})">
+                    <i class="btn btn-danger">Delete</i></a>
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="~/Person/Person" class="btn btn-primary">Create</a>

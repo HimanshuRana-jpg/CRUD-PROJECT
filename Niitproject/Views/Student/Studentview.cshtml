@@ -1,0 +1,36 @@
+﻿@model Niitproject.Context.Student
+@{
+    ViewBag.Title = "Studentview";
+}
+
+@using (Html.BeginForm("AddStudent", "Student", FormMethod.Post))
+{
+    /*is a Razor Syntex for example we write in html form
+     * <form>
+     * </form>
+    */
+    <div class="container">
+        <div class="form-group">
+            @Html.HiddenFor(x => x.Studentid)
+
+            <label>Student Name</label>
+            @Html.TextBoxFor(x => x.Student_Name,new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Age</label>
+        @Html.TextBoxFor(x => x.Age,new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>DOB</label>
+        @Html.TextBoxFor(x => x.DOB,new { @class = "form- control" })
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-danger">Cancel</button>
+    </div>
+}
+

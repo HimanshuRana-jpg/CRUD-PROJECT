@@ -1,0 +1,57 @@
+﻿@model Test_project.Models.person
+
+@{
+    ViewBag.Title = "Person";
+}
+
+@{Layout = "~/Views/Person/_LayoutP.cshtml"; }
+
+@section Scripts {@Scripts.Render("~/bundles/jqueryval")}
+
+<style>
+    .gsf,.curd{
+        text-align:center;
+    }
+    .curd{
+        margin-top:10px;
+        margin-bottom:10px;
+        background-size:5px;
+    }
+    .error {
+        color: red;
+    }
+    .btn-danger{
+        padding-left:1em;
+        padding-right:1em;
+        padding-top:3px;
+        padding-bottom:3.5px;
+        text-decoration:none;
+    }
+</style>
+
+@using (Html.BeginForm("AddPerson","Person", FormMethod.Post))
+
+{
+    <h4>Person</h4>
+    <div class="container">
+        <div class="form-group">
+            @Html.HiddenFor(m => m.PersonID)
+            <label>First Name</label>
+            @Html.TextBoxFor(m => m.FName, new { @class = "curd" })
+            @Html.ValidationMessageFor(m => m.FName, "" ,new { @class = "error" })
+        </div>
+
+        <div class="form-group">
+            <label>Last Name</label>
+
+            @Html.TextBoxFor(m => m.LName, new { @class = "curd" })
+            @Html.ValidationMessageFor(m => m.LName, "", new { @class = "error" })
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn-primary">Submit</button>
+
+            <a href="~/Person/Personlist" class="btn-danger">Read</a>
+        </div>
+    </div>
+}
