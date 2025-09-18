@@ -1,0 +1,39 @@
+name: Build and Deploy Test Project
+
+# Trigger the workflow on push or manual dispatch
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Check out your code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Set up .NET (assuming your project is ASP.NET, adjust if different)
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0.x' # Use the .NET version your project needs
+
+    # Restore dependencies
+    - name: Restore dependencies
+      run: dotnet restore Test project/Test project.sln
+
+    # Build the project
+    - name: Build
+      run: dotnet build Test project/Test project.sln --configuration Release --no-restore
+
+    # Optional: Deploy to GitHub Pages (for static content)
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/master'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./Test project/bin/Release/net6.0/publish/wwwroot # Adjust path based on your project
